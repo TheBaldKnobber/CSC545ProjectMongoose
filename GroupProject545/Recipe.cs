@@ -49,19 +49,75 @@ namespace GroupProject545
                     Console.WriteLine("Food id: " + ingredient.food_id);
                     Console.WriteLine("Food name: " + ingredient.food_name);
                     Console.WriteLine("In fridge: " + ingredient.in_fridge);
+                    Console.WriteLine();
                 }
             }
             Console.ReadLine();
             return recipe_json;
         }
 
-        public Recipe GetARecipe(int recipe_id)
+        public Recipe GetARecipeID(int recipe_id)
         {
             string endpoint = "http://mongoose.theerroris.me/recipe/" + recipe_id + "/";
             Console.WriteLine("Making a json request to " + endpoint);
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(endpoint);
             httpWebRequest.Method = "GET";
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            var jsonString = (new StreamReader(httpResponse.GetResponseStream())).ReadToEnd();
+            Recipe recipe_json = JsonConvert.DeserializeObject<Recipe>(jsonString);
+            Console.WriteLine("Recipe name: " + recipe_json.rec_name);
+            Console.WriteLine("Recipe id: " + recipe_json.rec_id);
+            Console.WriteLine("Recipe instructions: " + recipe_json.instructions);
+            Console.WriteLine("Recipe category: " + recipe_json.category);
+            foreach (var ingredient in recipe_json.ingredients)
+            {
+                Console.WriteLine("Ingredient FK Nutrition fact id: " + ingredient.fk_nfact_id);
+                Console.WriteLine("Food id: " + ingredient.food_id);
+                Console.WriteLine("Food name: " + ingredient.food_name);
+                Console.WriteLine("In fridge: " + ingredient.in_fridge);
+            }
+            Console.ReadLine();
+            return recipe_json;
+        }
+
+        public RootObjectRecipe GetARecipeName(string recipe_name)
+        {
+            string endpoint = "http://mongoose.theerroris.me/recipe/" + recipe_name + "/";
+            Console.WriteLine("Making a json request to " + endpoint);
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(endpoint);
+            httpWebRequest.Method = "GET";
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            var jsonString = (new StreamReader(httpResponse.GetResponseStream())).ReadToEnd();
+            RootObjectRecipe recipe_json = JsonConvert.DeserializeObject<RootObjectRecipe>(jsonString);
+            foreach (var recipes in recipe_json.recipes)
+            {
+                Console.WriteLine("Recipe name: " + recipes.rec_name);
+                Console.WriteLine("Recipe id: " + recipes.rec_id);
+                Console.WriteLine("Recipe instructions: " + recipes.instructions);
+                Console.WriteLine("Recipe category: " + recipes.category);
+                foreach (var ingredient in recipes.ingredients)
+                {
+                    Console.WriteLine("Ingredient FK Nutrition fact id: " + ingredient.fk_nfact_id);
+                    Console.WriteLine("Food id: " + ingredient.food_id);
+                    Console.WriteLine("Food name: " + ingredient.food_name);
+                    Console.WriteLine("In fridge: " + ingredient.in_fridge);
+                }
+            }
+            Console.ReadLine();
+            return recipe_json;
+        }
+
+        public Recipe DeleteARecipeID(int recipe_id)
+        {
+            string endpoint = "http://mongoose.theerroris.me/recipe/" + recipe_id + "/delete/";
+            Console.WriteLine("Making a json request to " + endpoint);
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(endpoint);
+            httpWebRequest.Method = "DELETE";
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             var jsonString = (new StreamReader(httpResponse.GetResponseStream())).ReadToEnd();

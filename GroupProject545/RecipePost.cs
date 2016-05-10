@@ -14,16 +14,22 @@ namespace GroupProject545
         [JsonProperty("category")]
         public string category { get; set; }
         [JsonProperty("ingredients")]
-        public List<IngredientPost> ingredients_post { get; set; }
+        public List<int> ingredients_post { get; set; }
         [JsonProperty("instructions")]
         public string instructions { get; set; }
         [JsonProperty("rec_id")]
         public int rec_id { get; set; }
         [JsonProperty("rec_name")]
         public string rec_name { get; set; }
-        public void CreateRecipe(RecipePost r)
+
+        public RecipePost() {
+            this.ingredients_post = new List<int>();
+        }
+        public void CreateRecipe()
         {
-            string json = JsonConvert.SerializeObject(r);
+            var recipe = new {recipes=new List<RecipePost>()};
+            recipe.recipes.Add(this);
+            string json = JsonConvert.SerializeObject(recipe);
             string endpoint = "http://mongoose.theerroris.me/recipe/";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(endpoint);
             httpWebRequest.ContentType = "application/json";

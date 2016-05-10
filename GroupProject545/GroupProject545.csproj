@@ -52,11 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fridge.cs" />
     <Compile Include="Ingredient.cs" />
+    <Compile Include="IngredientPost.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recipe.cs" />
     <Compile Include="RecipePost.cs" />
+    <Compile Include="RootObjectFridge.cs" />
     <Compile Include="RootObjectRecipe.cs" />
   </ItemGroup>
   <ItemGroup>

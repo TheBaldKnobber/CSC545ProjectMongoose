@@ -14,12 +14,24 @@ namespace GroupProject545
 
         static void Main(string[] args)
         {
-            RecipePost recipe = new RecipePost();
-            recipe.rec_name = "David's food";
-            recipe.instructions = "David's instructions for said food item";
-            recipe.ingredients_post.Add(new IngredientPost {food_id = 1}); //errors here
-            recipe.category = "entree";
-            recipe.CreateRecipe(recipe);
+            //Recipe recipe = new Recipe();
+            //recipe.rec_name = "David's food";
+            //recipe.instructions = "David's instructions for said food item";
+            //recipe.ingredients_post.Add(1); //errors here
+            //recipe.category = "entree";
+            //recipe.CreateRecipe();
+            //var recipe_i_want = recipe.GetARecipeName("David's food");
+            //foreach(var recipes in recipe_i_want.recipes){
+            //    Console.WriteLine(recipe.rec_name);
+            //}
+
+            //Fridge fridge = new Fridge();
+            //fridge.GetAllFridgeItems();
+
+            Recipe recipe = new Recipe();
+            recipe.GetAllRecipes();
+            recipe.DeleteARecipeID(1);
+            recipe.GetAllRecipes();
         }
     }
 
